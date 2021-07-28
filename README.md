@@ -1,1 +1,1 @@
-A Countdown Timer created with JavaScript
+A Countdown Timer created with JavaScript.
