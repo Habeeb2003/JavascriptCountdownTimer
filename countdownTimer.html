@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="countdownTimer.css">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <div style="text-align: center;">
+            <h1>COUNTDOWN TIMER</h1>
+        </div>
+    </section>
+    <main class="container">
+        <section id="screenSect">
+            <span id="Min"></span>
+            <span>:</span>
+            <span id="Sec"></span>
+            <span>.</span>
+            <span id="milli"></span>
+        </section>
+        <section id="inputSect">
+            <input type="text" id="fIn" oninput="input(this.id)">
+            <br>
+            <input type="text" id="sIn" oninput="input(this.id)">
+        </section>
+        <section id="btnSect">
+            <div>
+                <button class="btn btn-danger" onclick="Play(this.innerHTML)">Reset</button>
+                <button class="btn btn-danger" onclick="Play(this.innerHTML)">stop</button>
+                <button id="playAndPause" onclick="Play(this.innerHTML)" class="btn btn-primary"></button>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+         let screen = document.getElementById('screenSect')
+        let first = document.querySelector('#fIn')
+        let second = document.querySelector('#sIn') 
+        let pAndpBtn = document.getElementById('playAndPause')
+        pAndpBtn.innerHTML = "Play"
+        let minDisp = document.getElementById('Min')
+        let secDisp = document.getElementById('Sec')
+        let milliDisp = document.getElementById('milli')
+        minDisp.innerHTML= "0"
+        secDisp.innerHTML = "00"
+        milliDisp.innerHTML = "00"
+        let secPerMinute = "59"
+        let newMilliVal, myset 
+        let isPlayPressed = false;
+        let isPausedPressed = false;
+        let my
+        let a = 0
+        let milliInterval = 10
+
+        function Play (value) {
+            if (value == "Reset") {
+                clearInterval(my)
+                secDisp.innerHTML = "00"
+                minDisp.innerHTML = "0"
+                milli.innerHTML = "00"
+                pAndpBtn.innerHTML = "Play"
+                return
+            }
+            if (value == "stop") {
+                clearInterval(my)
+                return  
+            }
+            if (value == "Pause") {
+                clearInterval(my)
+                newMilliVal = milli.innerHTML
+                pAndpBtn.innerHTML = "Play"
+                isPausedPressed = true;
+                return
+            }
+            if ( value == "Play") {
+                console.log(value);
+                milli.innerHTML = 99
+                pAndpBtn.innerHTML = "Pause"
+                isPlayPressed = true;
+                if (isPausedPressed == true) {
+                    milli.innerHTML = newMilliVal
+                    console.log(milli.innerHTML);
+                }
+            }
+            if (isPlayPressed) {
+            }
+            show()
+        }
+
+        function input(params) {
+            if (params == "fIn") {
+                minDisp.innerHTML = first.value
+            }
+            else if (params == "sIn") {
+                secDisp.innerHTML = second.value
+            }
+        }
+        
+        function show(params) {
+            my = setInterval(() => {
+                if (secDisp.innerHTML == -1) {
+                    minDisp.innerHTML -= 1
+                    secDisp.innerHTML = secPerMinute
+                    clearInterval(my)
+                    show()
+                    console.log("a");
+                    return
+                }
+                if (minDisp.innerHTML == "0" && secDisp.innerHTML == "0") {
+                    clearInterval(my)
+                    milli.innerHTML = "00"
+                    timeout()
+                    console.log("b");
+                    return
+                }
+                if (a == 1000) {
+                    secDisp.innerHTML --
+                    milli.innerHTML = 99
+                    console.log(a);
+                    clearInterval(my)
+                    a = 0
+                    show()
+                    console.log('c');
+                    return
+                }
+                a += milliInterval
+                milli.innerHTML --
+            }, milliInterval);
+        }
+
+        function timeout() {
+            screen.innerHTML = ""
+            screen.innerHTML = `<h1>TIMEOUT</p>`
+            setTimeout(function() {
+                screen.innerHTML = ""
+                setTimeout(timeout, 500)
+            }, 500)
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

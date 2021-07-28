@@ -1,0 +1,39 @@
+main {
+  max-width: 500px !important;
+}
+main #screenSect {
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main #screenSect span {
+  font-size: 60px;
+  font-weight: bolder;
+}
+main #inputSect {
+  text-align: center;
+}
+main #inputSect input {
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+  border-radius: 20px;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+main #btnSect div {
+  text-align: center;
+}
+main #btnSect div button {
+  width: 150px !important;
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+/*# sourceMappingURL=countdownTimer.css.map */
